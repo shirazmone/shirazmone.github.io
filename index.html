@@ -1,0 +1,415 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>阅读须知</title>
+  <style>
+    :root {
+      --bg: #000000;
+      --panel: rgba(255, 255, 255, 0.045);
+      --panel-strong: rgba(255, 255, 255, 0.07);
+      --line: rgba(255, 255, 255, 0.13);
+      --line-strong: rgba(255, 255, 255, 0.2);
+      --text: rgba(255, 255, 255, 0.92);
+      --text-soft: rgba(255, 255, 255, 0.72);
+      --text-dim: rgba(255, 255, 255, 0.45);
+      --shadow: 0 22px 60px rgba(0, 0, 0, 0.5);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      width: 100%;
+      min-height: 100%;
+      background: var(--bg);
+      color: var(--text);
+      font-family:
+        "Noto Serif SC",
+        "Source Han Serif SC",
+        "Songti SC",
+        "STSong",
+        "SimSun",
+        serif;
+      overflow: hidden;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .page {
+      position: relative;
+      width: 100%;
+      min-height: 100vh;
+      background: #000;
+      overflow: hidden;
+    }
+
+    .bg-layer {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background: #000;
+    }
+
+    .eye-video,
+    .eye-front {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: min(1500px, 100vw);
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      object-fit: contain;
+      filter: blur(8px) grayscale(1) brightness(1) contrast(1.3);
+    }
+
+    .eye-video {
+      opacity: 0.45;
+      transition:
+        opacity 0.18s ease,
+        filter 0.18s ease,
+        transform 0.18s ease;
+    }
+
+    .eye-front {
+      opacity: 0;
+      transition:
+        opacity 0.12s ease,
+        filter 0.12s ease,
+        transform 0.12s ease;
+    }
+
+    .page.awaken .eye-video {
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(1.015);
+      filter: blur(20px) grayscale(1) brightness(0.7) contrast(1.2);
+    }
+
+    .page.awaken .eye-front {
+      opacity: 0.45;
+      transform: translate(-50%, -50%) scale(1.01);
+      filter: blur(8px) grayscale(1) brightness(1) contrast(1.3);
+    }
+
+    .notice-wrap {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: min(1180px, calc(100vw - 64px));
+      transform:  translate(-50%, -50%);
+      z-index: 2;
+    }
+
+    .notice-box {
+      position: relative;
+      min-height: 420px;
+      width: 100%;
+      background:
+        linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.055) 0%,
+          rgba(255, 255, 255, 0.035) 100%
+        );
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(16px) saturate(80%);
+      -webkit-backdrop-filter: blur(16px) saturate(80%);
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    .notice-box::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      background: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.25) 0%,
+        rgba(255, 255, 255, 0.08) 20%,
+        rgba(255, 255, 255, 0.16) 50%,
+        rgba(255, 255, 255, 0.08) 80%,
+        rgba(255, 255, 255, 0.22) 100%
+      );
+    }
+
+    .notice-box::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(
+          90deg,
+          rgba(255,255,255,0.03) 0%,
+          rgba(255,255,255,0.01) 14%,
+          rgba(255,255,255,0.008) 50%,
+          rgba(255,255,255,0.01) 86%,
+          rgba(255,255,255,0.03) 100%
+        );
+      pointer-events: none;
+    }
+
+    .notice-inner {
+      position: relative;
+      z-index: 3;
+      width: min(820px, calc(100% - 120px));
+      margin: 0 auto;
+      padding: 54px 0 42px;
+      text-align: center;
+    }
+
+    h1 {
+      margin: 0 0 28px;
+      font-size: clamp(30px, 3vw, 40px);
+      font-weight: 400;
+      letter-spacing: 0.22em;
+      color: rgba(255, 255, 255, 0.94);
+    }
+
+    .title-line {
+      width: 100%;
+      height: 1px;
+      margin: 0 0 28px;
+      background: linear-gradient(
+        90deg,
+        rgba(255,255,255,0) 0%,
+        rgba(255,255,255,0.18) 12%,
+        rgba(255,255,255,0.08) 50%,
+        rgba(255,255,255,0.18) 88%,
+        rgba(255,255,255,0) 100%
+      );
+    }
+
+    .notice-content {
+      min-height: 170px;
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .notice-content.fade-out {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+
+    .notice-list {
+      margin: 0 auto;
+      padding-left: 0;
+      list-style-position: inside;
+      text-align: center;
+      color: var(--text-soft);
+      font-size: 17px;
+      line-height: 2.15;
+      letter-spacing: 0.03em;
+    }
+
+    .notice-list li + li {
+      margin-top: 4px;
+    }
+
+    .actions {
+      margin-top: 30px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .accept-btn {
+      appearance: none;
+      min-width: 220px;
+      padding: 13px 28px;
+      border: 1px solid var(--line-strong);
+      background: rgba(255, 255, 255, 0.025);
+      color: rgba(255, 255, 255, 0.9);
+      font-family: inherit;
+      font-size: 14px;
+      letter-spacing: 0.16em;
+      cursor: pointer;
+      transition:
+        background 0.35s ease,
+        border-color 0.35s ease,
+        transform 0.35s ease,
+        color 0.35s ease,
+        box-shadow 0.35s ease;
+    }
+
+    .accept-btn:hover {
+      background: rgba(255, 255, 255, 0.055);
+      border-color: rgba(255, 255, 255, 0.28);
+      color: #fff;
+      transform: translateY(-1px);
+      box-shadow: 0 0 24px rgba(255, 255, 255, 0.035);
+    }
+
+    .ambient-vignette {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at center, rgba(0,0,0,0) 0%, rgba(0,0,0,0.12) 56%, rgba(0,0,0,0.46) 100%);
+    }
+
+    @media (max-width: 960px) {
+      .notice-wrap {
+        width: min(100vw - 24px, 100%);
+      }
+
+      .notice-box {
+        min-height: 360px;
+      }
+
+      .notice-inner {
+        width: min(100%, calc(100% - 44px));
+        padding: 40px 0 34px;
+      }
+
+      .notice-list {
+        font-size: 15px;
+        line-height: 2;
+      }
+
+      .eye-video,
+      .eye-front {
+        width: 130vw;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .notice-box {
+        min-height: 390px;
+      }
+
+      h1 {
+        font-size: 26px;
+        letter-spacing: 0.14em;
+      }
+
+      .notice-inner {
+        width: calc(100% - 30px);
+      }
+
+      .notice-list {
+        font-size: 14px;
+        line-height: 1.95;
+      }
+
+      .accept-btn {
+        min-width: 190px;
+        font-size: 13px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page" id="page">
+    <div class="bg-layer">
+      <video
+        class="eye-video"
+        id="eyeVideo"
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="auto"
+      >
+        <source src="creepy-eyes.mp4" type="video/mp4">
+      </video>
+
+      <img
+        class="eye-front"
+        id="eyeFront"
+        src="eyes-front (2).png"
+        alt=""
+      >
+
+      <div class="ambient-vignette"></div>
+    </div>
+
+    <div class="notice-wrap">
+      <main class="notice-box">
+        <div class="notice-inner">
+          <h1>阅读须知</h1>
+          <div class="title-line"></div>
+
+          <div class="notice-content" id="noticeContent">
+            <ol class="notice-list" id="noticeList">
+              <li>本文是 Steve × Herobrine 为主的 Herobrine 右向文。</li>
+              <li>本文背景参考 SCP 基金会，以逆模因部为原型，有大量魔改。</li>
+              <li>内含大量猎奇描写，主要角色死亡。</li>
+              <li>请确定你是否知晓。</li>
+            </ol>
+          </div>
+
+          <div class="actions">
+            <button class="accept-btn" id="acceptBtn">我已知晓并接受</button>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    const page = document.getElementById("page");
+    const noticeContent = document.getElementById("noticeContent");
+    const noticeList = document.getElementById("noticeList");
+    const acceptBtn = document.getElementById("acceptBtn");
+    const eyeVideo = document.getElementById("eyeVideo");
+
+    let step = 1;
+
+    const noticePage1 = [
+      "本文是 Steve × Herobrine 为主的 Herobrine 右向文。",
+      "本文背景参考 SCP 基金会，以逆模因部为原型，有大量魔改。",
+      "内含微恐元素、大量猎奇描写，主要角色死亡。",
+      "请确定你是否知晓。"
+    ];
+
+    const noticePage2 = [
+      "本页面包含背景音乐，建议阅读时佩戴耳机。",
+      "本文分为三册，共 7 章，另有一番外章。",
+      "阅读过程中请留意奇怪的地方。",
+      "点击下方选项后，将正式进入第一章。"
+    ];
+
+    function renderNotice(list) {
+      noticeList.innerHTML = "";
+      list.forEach(text => {
+        const li = document.createElement("li");
+        li.textContent = text;
+        noticeList.appendChild(li);
+      });
+    }
+
+    acceptBtn.addEventListener("click", function () {
+      if (step === 1) {
+        noticeContent.classList.add("fade-out");
+
+        setTimeout(() => {
+          renderNotice(noticePage2);
+          noticeContent.classList.remove("fade-out");
+          step = 2;
+
+          page.classList.add("awaken");
+
+          if (eyeVideo) {
+            eyeVideo.pause();
+          }
+        }, 120);
+      } else {
+        window.location.href = "chapter1.html";
+      }
+    });
+
+    renderNotice(noticePage1);
+  </script>
+</body>
+</html>
