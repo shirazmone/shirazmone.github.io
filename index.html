@@ -306,6 +306,68 @@
         min-width: 190px;
         font-size: 13px;
       }
+      
+      @media (max-width: 768px) {
+  .eye-video,
+  .eye-front {
+    width: 112vw;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    filter: blur(4px) grayscale(1) brightness(1.18) contrast(1.38);
+  }
+
+  .eye-video {
+    opacity: 0.62;
+  }
+
+  .page.awaken .eye-front {
+    opacity: 0.68;
+    transform: translate(-50%, -50%) scale(1);
+    filter: blur(3px) grayscale(1) brightness(1.2) contrast(1.4);
+  }
+
+  .page.awaken .eye-video {
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  .notice-wrap {
+    width: min(92vw, 820px);
+  }
+
+  .notice-box {
+    min-height: 340px;
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(8px) saturate(70%);
+    -webkit-backdrop-filter: blur(8px) saturate(70%);
+  }
+
+  .notice-inner {
+    width: calc(100% - 36px);
+    padding: 34px 0 30px;
+  }
+
+  h1 {
+    font-size: 24px;
+    letter-spacing: 0.12em;
+    margin-bottom: 20px;
+  }
+
+  .title-line {
+    margin-bottom: 20px;
+  }
+
+  .notice-list {
+    font-size: 14px;
+    line-height: 1.9;
+  }
+
+  .accept-btn {
+    min-width: 180px;
+    padding: 12px 20px;
+    font-size: 13px;
+  }
+}
     }
   </style>
 </head>
