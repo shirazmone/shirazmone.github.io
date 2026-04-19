@@ -30,9 +30,9 @@ body {
 
 /* ===== 段落 ===== */
 .chapter-content p {
-  font-size: 1.05rem;  
-  line-height: 1.8;
-  margin: 1em 0;
+  font-size: 0.95rem;  
+  line-height: 1.6;
+  margin: 0.9em 0;
 }
 
 .chapter-content {
