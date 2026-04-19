@@ -30,7 +30,7 @@ body {
 
 /* ===== 段落 ===== */
 .chapter-content p {
-  font-size: 1.2rem;   /* 原来大概1.0~1.05，现在明显变大 */
+  font-size: 1.05rem;  
   line-height: 1.8;
   margin: 1em 0;
 }
