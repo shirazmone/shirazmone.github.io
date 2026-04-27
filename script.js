@@ -1,9 +1,13 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const enterBtn = document.getElementById("enterBtn");
+const hiddenTexts = document.querySelectorAll(".hidden-text");
 
-  if (enterBtn) {
-    enterBtn.addEventListener("click", () => {
-      window.location.href = "chapters/chapter1.html";
-    });
-  }
+document.addEventListener("selectionchange", () => {
+  const selectedText = window.getSelection().toString().trim();
+
+  hiddenTexts.forEach(el => {
+    if (selectedText.length > 0) {
+      el.classList.add("show");
+    } else {
+      el.classList.remove("show");
+    }
+  });
 });
