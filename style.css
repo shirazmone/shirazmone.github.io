@@ -1,10 +1,16 @@
+@font-face {
+  font-family: "LXGW WenKai";
+  src: url("./assets/fonts/LXGWWenKaiGB-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
 /* ===== 全局基础 ===== */
 body {
   margin: 0;
   padding: 0;
   background: #fff;
   color: #2a2a2a;
-  font-family: Calibri, Arial, sans-serif;
+  font-family: "LXGW WenKai", Calibri, Arial, sans-serif;
   line-height: 1.7;
 }
 
@@ -30,9 +36,9 @@ body {
 
 /* ===== 段落 ===== */
 .chapter-content p {
-  font-size: 0.95rem;  
-  line-height: 1.6;
-  margin: 0.9em 0;
+  font-size: 1.2rem;   /* 原来大概1.0~1.05，现在明显变大 */
+  line-height: 1.8;
+  margin: 1em 0;
 }
 
 .chapter-content {
@@ -88,11 +94,12 @@ ruby {
   top: -1.2em;          /* 控制高度 */
   left: 50%;
   transform: translateX(-50%);
-  font-size: 1em;
+  font-size: 0.7em;
   white-space: nowrap;
   color: #666;
   pointer-events: none;
   font-weight: bold;
+  font-family: "LXGW WenKai", Calibri, Arial, sans-serif;
 }
 /* ===== annot 渐变颜色 ===== */
 .top.level1 {
@@ -109,4 +116,15 @@ ruby {
 
 .top.level4 {
   color: #555555;   /* 最暗 */
+}
+
+
+
+.hidden-text {
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.hidden-text.show {
+  opacity: 1;
 }
